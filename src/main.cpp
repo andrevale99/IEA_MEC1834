@@ -35,7 +35,7 @@ float capacidade_de_carga_dinamica(float fh, float fn, float P)
 //  @param Fa Carga Axial (kN)
 float carga_dinamica_equivalente(float x, float y, float Fr, float Fa)
 {
-    return (x * Fr + y * Fa)
+    return (x * Fr + y * Fa);
 }
 
 //===================================================
