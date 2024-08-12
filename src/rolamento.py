@@ -8,6 +8,7 @@ class RolamentoGUI(tk.Tk):
 
         self.diametro = 0 # (mm)
         self.rpm = 0
+        self.horas = 0
 
         self.fh = 0 # Coeficiente de Vida (adimensional)
         self.fn = 0 # Coeficiente de Rotacao (adimensional)
@@ -102,19 +103,25 @@ class RolamentoGUI(tk.Tk):
 
     def rotina_get_inputs(self):
         if self.entry_d.get().isdigit():
-            pass
+            self.diametro = float(self.entry_d.get())
+
         if self.entry_rpm.get().isdigit():
-            pass
+            self.rpm = float(self.entry_rpm.get())
+
         if self.entry_horas.get().isdigit():
-            pass
+            self.horas = float(self.entry_horas.get())
+
         if self.entry_Fr.get().isdigit():
-            pass
+            self.Fr = float(self.entry_Fr.get())
+
         if self.entry_Fa.get().isdigit():
-            pass
+            self.Fa = float(self.entry_Fa.get())
+
         if self.entry_fh.get().isdigit():
-            pass
+            self.fh = float(self.entry_fh.get())
+
         if self.entry_fn.get().isdigit():
-            pass
+            self.fn = float(self.entry_fn.get())
 
 
 
