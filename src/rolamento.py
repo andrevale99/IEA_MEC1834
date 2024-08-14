@@ -14,8 +14,8 @@ class RolamentoGUI(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.width = 640
-        self.height = 480
+        self.width = 600
+        self.height = 420
         self.x_monitor = 100
         self.y_monitor = 100
 
@@ -47,10 +47,12 @@ class RolamentoGUI(tk.Tk):
         self.text_label_variavel = StringVar()
         self.boolean_flag = True # variavel auxiliar
 
-        self.title("Dimensionador de Rolamentos")
+        self.title("Projeto IEA (Rolamentos)")
 
         self.geometry(f"{self.width}x{self.height}+{self.x_monitor}+{self.y_monitor}")
         self.reset_gui()
+
+        messagebox.showinfo("Unidade de medidas", "SI parceiro")
 
     def capacidade_de_carga_dimanica(self):
         self.C = self.fh / self.fn * self.P
@@ -181,10 +183,10 @@ class RolamentoGUI(tk.Tk):
         self.label_y1.grid(row=grid_rows[11], column=2, sticky="W", padx=4, pady=4)
         self.entry_y1.grid(row=grid_rows[11], column=3, sticky="W", padx=4, pady=4)
 
-        self.button_calcular.grid(row=grid_rows[13], column=0, padx=4, pady=4)
-        self.button_resetar.grid(row=grid_rows[13], column=1, padx=4, pady=4)
+        self.button_calcular.grid(row=grid_rows[13], column=1, padx=4, pady=4)
+        self.button_resetar.grid(row=grid_rows[13], column=2, padx=4, pady=4)
 
-        self.label_result.grid(row=grid_rows[14], column=2, sticky="W", padx=4, pady=4)
+        self.label_result.grid(row=grid_rows[14], column=2, sticky="W", padx=1, pady=1)
 
         # self.label_final_Cr.grid(row=grid_rows[13], column=0, padx=4, pady=4)
         # self.label_final_C0r.grid(row=grid_rows[13], column=1, padx=4, pady=4)
@@ -258,8 +260,7 @@ Cr > C ? = {bool(self.Cr > self.C)}
 
     def rotina_e_menor(self):
         if self.boolean_flag:
-            messagebox.showwarning(f"e < Fa / Fr", f"Escolha os valores\npara Y0 e Y1")
-
+            messagebox.showwarning(f"e < Fa / Fr", f"Escolha os valores\npara Y0 e Y1\ne={self.e}\nf0*Fa/C0r={(self.f0*self.Fa)/self.C0r}")
         if self.boolean_flag == False:
             self.x = 0.56
 
