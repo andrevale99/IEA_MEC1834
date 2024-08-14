@@ -40,21 +40,16 @@ class RolamentoGUI(tk.Tk):
 
         self.e = 0
 
+        # variaveis para interpolacao
+        self.e0 = 0
+        self.e1 = 0
+
         self.text_label_variavel = StringVar()
         self.boolean_flag = True # variavel auxiliar
 
         self.title("Dimensionador de Rolamentos")
 
         self.geometry(f"{self.width}x{self.height}+{self.x_monitor}+{self.y_monitor}")
-
-        self.y_tabela_e = [2.3,1.99,1.71,
-                           1.55,1.45,1.31,
-                           1.15,1.04,1.]
-        
-        self.y_relacao_tabela_e = [0.172,0.345,0.689,
-                                   1.03,1.38,2.07,
-                                   3.45,5.17,6.89]
-
         self.reset_gui()
 
     def capacidade_de_carga_dimanica(self):
@@ -224,7 +219,8 @@ class RolamentoGUI(tk.Tk):
             self.C0r = float(self.entry_C0r.get())
             self.f0 = float(self.entry_f0.get())
 
-            self.e = self.interpolacao_linear(
+            if self.boolean_flag:
+                self.e = self.interpolacao_linear(
                                                 float(self.entry_y0.get()), float(self.entry_y1.get()),
                                                 self.carga_dinamica_equivalente_relacao(),
                                                 float(self.entry_e0.get()), float(self.entry_e1.get())
@@ -240,33 +236,40 @@ class RolamentoGUI(tk.Tk):
         if self.e >= self.Fa / self.Fr:
             self.rotina_e_maior()
         else:
+            if self.boolean_flag:
+                self.e0 = float(self.entry_e0.get())
+                self.e1 = float(self.entry_e1.get())
+
+                self.entry_e0.destroy()
+                self.entry_e1.destroy()
+
             self.rotina_e_menor()
 
     def rotina_e_menor(self):
+        if self.boolean_flag:
+            messagebox.showwarning(f"e < Fa / Fr", f"Escolha os valores\npara Y0 e Y1")
 
-        self.x = 0.56
+        if self.boolean_flag == False:
+            self.x = 0.56
 
-        for i in range(0, len(self.y_tabela_e)):
-            if self.e < self.y_relacao_tabela_e[i]:
-                print(f'{self.y_tabela_e[i]} \t {self.y_tabela_e[i-1]}')
-                self.y = (self.y_tabela_e[i] + self.y_relacao_tabela_e[i-1]) / 2
-                break
+            media = abs((float(self.entry_y1.get())+float(self.entry_y1.get())) / 2)
+            self.y = self.interpolacao_linear(x0=self.e0, x1=self.e1, y1=media, 
+                                              y0=float(self.entry_y0.get()), y=float(self.entry_y1.get()))
 
-        messagebox.showwarning(f"e < Fa / Fr", f"Valores escolhidos pelo programa\ny0={self.y_tabela_e[i-1]}\n\
-                               y1={self.y_tabela_e[i-1]}\nY={self.y}")
-
-        self.carga_dinamica_equivalente()
-        self.capacidade_de_carga_dimanica()
+            self.carga_dinamica_equivalente()
+            self.capacidade_de_carga_dimanica()
             
-        if self.Cr > self.C:
-            self.text_label_variavel.set("Rolamento ADEQUADO")
-            self.label_result.place(x=self.height/2, y=self.width/2)
-            self.put_results()
+            if self.Cr > self.C:
+                self.text_label_variavel.set("Rolamento ADEQUADO")
+                self.label_result.place(x=self.height/2, y=self.width/2)
+                self.boolean_flag = True
+                self.put_results()
                 
-        else:
-            self.text_label_variavel.set("Rolamento NÃO ADEQUADO")
-            self.label_result.place(x=self.height/2, y=self.width/2)
-            self.put_results()
+            else:
+                self.text_label_variavel.set("Rolamento NÃO ADEQUADO")
+                self.label_result.place(x=self.height/2, y=self.width/2)
+                self.boolean_flag = True
+                self.put_results()
 
         self.boolean_flag = False
 
@@ -280,11 +283,13 @@ class RolamentoGUI(tk.Tk):
         if self.Cr > self.C:
             self.text_label_variavel.set("Rolamento ADEQUADO")
             self.label_result.place(x=self.height/2, y=self.width/2)
+            self.boolean_flag = True
             self.put_results()
                 
         else:
             self.text_label_variavel.set("Rolamento NÃO ADEQUADO")
             self.label_result.place(x=self.height/2, y=self.width/2)
+            self.boolean_flag = True
             self.put_results()
 
 #=====================================================
