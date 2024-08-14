@@ -76,14 +76,14 @@ class RolamentoGUI(tk.Tk):
     # Cria as labels de texto para mostrar
     # ao usuario os campos de inputs
     def create_labels(self):
-        self.label_d = tk.Label(self, text="Diametro")
+        self.label_d = tk.Label(self, text="Diametro (mm)")
         self.label_rpm = tk.Label(self, text="RPM")
         self.label_fh = tk.Label(self, text="fh")
         self.label_fn = tk.Label(self, text="fn")
-        self.label_Fr = tk.Label(self, text="Fr")
-        self.label_Fa = tk.Label(self, text="Fa")
-        self.label_Cr = tk.Label(self, text="Cr")
-        self.label_C0r = tk.Label(self, text="C0r")
+        self.label_Fr = tk.Label(self, text="Fr (N)")
+        self.label_Fa = tk.Label(self, text="Fa (N)")
+        self.label_Cr = tk.Label(self, text="Cr (N)")
+        self.label_C0r = tk.Label(self, text="C0r (N)")
         self.label_f0 = tk.Label(self, text="f0")
 
         self.label_e0 = tk.Label(self, text="e0")
@@ -94,15 +94,15 @@ class RolamentoGUI(tk.Tk):
         self.text_label_variavel.set("")
         self.label_result = tk.Label(self, textvariable=self.text_label_variavel)
 
-        self.label_final_Cr = tk.Label(self, text="Cr (N)")
-        self.label_final_C0r = tk.Label(self, text="C0r (N)")
-        self.label_final_relacao = tk.Label(self, text="(f0*Fa)/C0r")
-        self.label_final_e = tk.Label(self, text="e")
-        self.label_final_X = tk.Label(self, text="X")
-        self.label_final_Y = tk.Label(self, text="Y")
-        self.label_final_P = tk.Label(self, text="P (N)")
-        self.label_final_C = tk.Label(self, text="C (N)")
-        self.label_final_teste = tk.Label(self, text="Cr > C ?")
+        # self.label_final_Cr = tk.Label(self, text="Cr (N)")
+        # self.label_final_C0r = tk.Label(self, text="C0r (N)")
+        # self.label_final_relacao = tk.Label(self, text="(f0*Fa)/C0r")
+        # self.label_final_e = tk.Label(self, text="e")
+        # self.label_final_X = tk.Label(self, text="X")
+        # self.label_final_Y = tk.Label(self, text="Y")
+        # self.label_final_P = tk.Label(self, text="P (N)")
+        # self.label_final_C = tk.Label(self, text="C (N)")
+        # self.label_final_teste = tk.Label(self, text="Cr > C ?")
 
 
     # Cria os inputs para o usuario
@@ -192,15 +192,17 @@ class RolamentoGUI(tk.Tk):
         # self.label_final_teste.grid(row=grid_rows[13], column=8, padx=4, pady=4)
     
     def put_results(self):
-        temp_string = f'Cr = {self.Cr}\n\
-                        C0r = {self.C0r}\n\
-                        f0*Fa/C0r = {(self.f0* self.Fa) / self.C0r}\n\
-                        e = {self.e}\n\
-                        X = {self.x}\n\
-                        Y = {self.y}\n\
-                        P = {self.P}\n\
-                        C= {self.C}\n\
-                        Cr > C ? = {bool(self.Cr > self.C)}\n'
+        temp_string = f'''
+Cr(N) = {self.Cr}
+C0r(N) = {self.C0r}
+f0*Fa/C0r = {(self.f0* self.Fa) / self.C0r}
+e = {self.e}
+X = {self.x}
+Y = {self.y}
+P (N) = {self.P}
+C (N) = {self.C}
+Cr > C ? = {bool(self.Cr > self.C)}
+'''
         
         with open("resultado.txt", "w") as file:
             file.write(temp_string)
@@ -252,7 +254,7 @@ class RolamentoGUI(tk.Tk):
         if self.boolean_flag == False:
             self.x = 0.56
 
-            media = abs((float(self.entry_y1.get())+float(self.entry_y1.get())) / 2)
+            media = abs((float(self.entry_y0.get())+float(self.entry_y1.get())) / 2)
             self.y = self.interpolacao_linear(x0=self.e0, x1=self.e1, y1=media, 
                                               y0=float(self.entry_y0.get()), y=float(self.entry_y1.get()))
 
