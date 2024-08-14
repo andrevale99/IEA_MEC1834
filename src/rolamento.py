@@ -78,6 +78,7 @@ class RolamentoGUI(tk.Tk):
     def create_labels(self):
         self.label_d = tk.Label(self, text="Diametro (mm)")
         self.label_rpm = tk.Label(self, text="RPM")
+        self.label_horas = tk.Label(self, text="Horas")
         self.label_fh = tk.Label(self, text="fh")
         self.label_fn = tk.Label(self, text="fn")
         self.label_Fr = tk.Label(self, text="Fr (N)")
@@ -109,6 +110,7 @@ class RolamentoGUI(tk.Tk):
     def create_inputs(self):
         self.entry_d = tk.Entry(self)
         self.entry_rpm = tk.Entry(self)
+        self.entry_horas = tk.Entry(self)
         self.entry_fh = tk.Entry(self)
         self.entry_fn = tk.Entry(self)
         self.entry_Fr = tk.Entry(self)
@@ -134,7 +136,7 @@ class RolamentoGUI(tk.Tk):
         # Vetor de grid de linhas para as
         # posicoes do grid dos elementos
         grid_rows = []
-        for i in range(0, 15):
+        for i in range(0, 16):
             grid_rows.append(i)
 
         self.label_d.grid(row=grid_rows[0], column=0, sticky='W', padx=4, pady=4)
@@ -143,43 +145,46 @@ class RolamentoGUI(tk.Tk):
         self.label_rpm.grid(row=grid_rows[1], column=0, sticky='W', padx=4, pady=4)
         self.entry_rpm.grid(row=grid_rows[1], column=1, padx=4 ,pady=4)
 
-        self.label_Fr.grid(row=grid_rows[2], column=0, sticky='W', padx=4, pady=4)
-        self.entry_Fr.grid(row=grid_rows[2], column=1, padx=4, pady=4)
+        self.label_horas.grid(row=grid_rows[2], column=0, sticky="W", padx=4, pady=4)
+        self.entry_horas.grid(row=grid_rows[2], column=1, padx=4, pady=4)
 
-        self.label_Fa.grid(row=grid_rows[3], column=0, sticky='W', padx=4, pady=4)
-        self.entry_Fa.grid(row=grid_rows[3], column=1, padx=4, pady=4)
+        self.label_Fr.grid(row=grid_rows[3], column=0, sticky='W', padx=4, pady=4)
+        self.entry_Fr.grid(row=grid_rows[3], column=1, padx=4, pady=4)
 
-        self.label_fh.grid(row=grid_rows[4], column=0,sticky='W', padx=4, pady= 4)
-        self.entry_fh.grid(row=grid_rows[4], column=1, padx=4 ,pady=4)
+        self.label_Fa.grid(row=grid_rows[4], column=0, sticky='W', padx=4, pady=4)
+        self.entry_Fa.grid(row=grid_rows[4], column=1, padx=4, pady=4)
 
-        self.label_fn.grid(row=grid_rows[5], column=0, sticky='W', padx=4, pady=4)
-        self.entry_fn.grid(row=grid_rows[5], column=1, padx=4, pady=4)
+        self.label_fh.grid(row=grid_rows[5], column=0,sticky='W', padx=4, pady= 4)
+        self.entry_fh.grid(row=grid_rows[5], column=1, padx=4 ,pady=4)
 
-        self.label_Cr.grid(row=grid_rows[6], column=0, sticky='W', padx=4, pady=4)
-        self.entry_Cr.grid(row=grid_rows[6], column=1, padx=4, pady=4)
+        self.label_fn.grid(row=grid_rows[6], column=0, sticky='W', padx=4, pady=4)
+        self.entry_fn.grid(row=grid_rows[6], column=1, padx=4, pady=4)
 
-        self.label_C0r.grid(row=grid_rows[7], column=0, sticky='W', padx=4, pady=4)
-        self.entry_C0r.grid(row=grid_rows[7], column=1, padx=4, pady=4)
+        self.label_Cr.grid(row=grid_rows[7], column=0, sticky='W', padx=4, pady=4)
+        self.entry_Cr.grid(row=grid_rows[7], column=1, padx=4, pady=4)
 
-        self.label_f0.grid(row=grid_rows[8], column=0, sticky='W', padx=4, pady=4)
-        self.entry_f0.grid(row=grid_rows[8], column=1, padx=4, pady=4)
+        self.label_C0r.grid(row=grid_rows[8], column=0, sticky='W', padx=4, pady=4)
+        self.entry_C0r.grid(row=grid_rows[8], column=1, padx=4, pady=4)
 
-        self.label_e0.grid(row=grid_rows[9], column=0, sticky="W", padx=4, pady=4)
-        self.entry_e0.grid(row=grid_rows[9], column=1, padx=4, pady=4)
+        self.label_f0.grid(row=grid_rows[9], column=0, sticky='W', padx=4, pady=4)
+        self.entry_f0.grid(row=grid_rows[9], column=1, padx=4, pady=4)
 
-        self.label_e1.grid(row=grid_rows[9], column=2, sticky="W", padx=4, pady=4)
-        self.entry_e1.grid(row=grid_rows[9], column=3, padx=4, pady=4)
+        self.label_e0.grid(row=grid_rows[10], column=0, sticky="W", padx=4, pady=4)
+        self.entry_e0.grid(row=grid_rows[10], column=1, padx=4, pady=4)
+
+        self.label_e1.grid(row=grid_rows[10], column=2, sticky="W", padx=4, pady=4)
+        self.entry_e1.grid(row=grid_rows[10], column=3, sticky="W", padx=4, pady=4)
         
-        self.label_y0.grid(row=grid_rows[10], column=0, sticky="W", padx=4, pady=4)
-        self.entry_y0.grid(row=grid_rows[10], column=1, padx=4, pady=4)
+        self.label_y0.grid(row=grid_rows[11], column=0, sticky="W", padx=4, pady=4)
+        self.entry_y0.grid(row=grid_rows[11], column=1, padx=4, pady=4)
 
-        self.label_y1.grid(row=grid_rows[10], column=2, sticky="W", padx=4, pady=4)
-        self.entry_y1.grid(row=grid_rows[10], column=3, padx=4, pady=4)
+        self.label_y1.grid(row=grid_rows[11], column=2, sticky="W", padx=4, pady=4)
+        self.entry_y1.grid(row=grid_rows[11], column=3, sticky="W", padx=4, pady=4)
 
-        self.label_result.grid(row=grid_rows[11], column=2, sticky="W", padx=4, pady=4)
+        self.button_calcular.grid(row=grid_rows[13], column=0, padx=4, pady=4)
+        self.button_resetar.grid(row=grid_rows[13], column=1, padx=4, pady=4)
 
-        self.button_calcular.grid(row=grid_rows[12], column=0, padx=4, pady=4)
-        self.button_resetar.grid(row=grid_rows[12], column=1, padx=4, pady=4)
+        self.label_result.grid(row=grid_rows[14], column=2, sticky="W", padx=4, pady=4)
 
         # self.label_final_Cr.grid(row=grid_rows[13], column=0, padx=4, pady=4)
         # self.label_final_C0r.grid(row=grid_rows[13], column=1, padx=4, pady=4)
@@ -193,6 +198,9 @@ class RolamentoGUI(tk.Tk):
     
     def put_results(self):
         temp_string = f'''
+d (mm) = {self.diametro}
+RPM = {self.rpm}
+horas = {self.horas}
 Cr(N) = {self.Cr}
 C0r(N) = {self.C0r}
 f0*Fa/C0r = {(self.f0* self.Fa) / self.C0r}
@@ -213,6 +221,7 @@ Cr > C ? = {bool(self.Cr > self.C)}
         try:
             self.diametro = float(self.entry_d.get())
             self.rpm = float(self.entry_rpm.get())
+            self.horas = float(self.entry_horas.get())
             self.Fr = float(self.entry_Fr.get())
             self.Fa = float(self.entry_Fa.get())
             self.fh = float(self.entry_fh.get())
@@ -263,13 +272,11 @@ Cr > C ? = {bool(self.Cr > self.C)}
             
             if self.Cr > self.C:
                 self.text_label_variavel.set("Rolamento ADEQUADO")
-                self.label_result.place(x=self.height/2, y=self.width/2)
                 self.boolean_flag = True
                 self.put_results()
                 
             else:
                 self.text_label_variavel.set("Rolamento NÃO ADEQUADO")
-                self.label_result.place(x=self.height/2, y=self.width/2)
                 self.boolean_flag = True
                 self.put_results()
 
@@ -284,13 +291,11 @@ Cr > C ? = {bool(self.Cr > self.C)}
             
         if self.Cr > self.C:
             self.text_label_variavel.set("Rolamento ADEQUADO")
-            self.label_result.place(x=self.height/2, y=self.width/2)
             self.boolean_flag = True
             self.put_results()
                 
         else:
             self.text_label_variavel.set("Rolamento NÃO ADEQUADO")
-            self.label_result.place(x=self.height/2, y=self.width/2)
             self.boolean_flag = True
             self.put_results()
 
